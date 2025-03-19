@@ -5,7 +5,7 @@ FROM node:alpine
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package.json package-lock.json /app/
+COPY package.json /app/
 
 # Clean npm cache
 RUN npm cache clean --force
