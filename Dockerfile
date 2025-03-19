@@ -1,21 +1,23 @@
 # Use Node.js Alpine base image
 FROM node:alpine
 
-# Create and set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json
 COPY package.json package-lock.json /app/
 
-# Install dependencies
-RUN npm install
+# Clean npm cache
+RUN npm cache clean --force
 
-# Copy the entire codebase to the working directory
+# Install dependencies
+RUN npm install --legacy-peer-deps  # Try adding --legacy-peer-deps
+
+# Copy the full codebase
 COPY . /app/
 
-# Expose the port your app runs on (replace <PORT_NUMBER> with your app's actual port)
+# Expose port
 EXPOSE 3000
 
-# Define the command to start your application (replace "start" with the actual command to start your app)
+# Start the app
 CMD ["npm", "start"]
-
